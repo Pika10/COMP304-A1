@@ -14,6 +14,7 @@ int main(int argc, char* argv[])
 	int n = atoi(argv[1]);
 	int childNumber = 0;
 	char* cmd = argv[2];
+	char* arg = argv[3];
 	int fd[n][2];
 	int cN[n][2];
 	pid_t pid;
@@ -39,7 +40,14 @@ int main(int argc, char* argv[])
 			pid2 = fork();
 			if (pid2 == 0)
 			{
-				execlp(cmd,cmd,NULL);
+				if (arg != NULL)
+				{
+					execlp(cmd,cmd,arg,NULL);
+				}
+				else
+				{
+					execlp(cmd,cmd,arg,NULL);
+				}
 				exit(0);
 			}
 
